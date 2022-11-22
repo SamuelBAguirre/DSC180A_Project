@@ -19,32 +19,31 @@ def main(targets):
     `main` runs the targets in order of data=>analysis=>model.
     '''
 
-    if 'data' in targets:
-        with open('config/data-params.json') as fh:
-            data_cfg = json.load(fh)
+#     if 'data' in targets:
+#         with open('config/data-params.json') as fh:
+#             data_cfg = json.load(fh)
 
-        # make the data target
-        data = etl.get_data(**data_cfg)
+#         # make the data target
+#         data = etl.get_data(**data_cfg)
 
-    if 'analysis' in targets:
-        with open('config/analysis-params.json') as fh:
-            analysis_cfg = json.load(fh)
+#     if 'analysis' in targets:
+#         with open('config/analysis-params.json') as fh:
+#             analysis_cfg = json.load(fh)
 
-        # make the data target
-        compute_aggregates(data, **analysis_cfg)
+#         # make the data target
+#         compute_aggregates(data, **analysis_cfg)
 
-    if 'model' in targets:
-        with open('config/model-params.json') as fh:
-            model_cfg = json.load(fh)
+#     if 'model' in targets:
+#         with open('config/model-params.json') as fh:
+#             model_cfg = json.load(fh)
 
-        # make the data target
-        train(data, **model_cfg)
+#         # make the data target
+#         train(data, **model_cfg)
         
     if 'test' in targets:
-        with open('config/test-params.json') as fh:
-            test_cfg = json.load(fh)
+        # here we want to read in the files saved in test/testdata and save them somewhere (probably just a folder named out)
 
-        # make the data target
+        
         
         
      
