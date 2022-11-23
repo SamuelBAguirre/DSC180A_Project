@@ -1,1 +1,0 @@
-here we just want some of the tif files that we want to test on, probably like ~5 tif files

@@ -6,14 +6,13 @@ import numpy as np
 import glob
 import rasterio
 from datetime import datetime
-
-
-
 import ee
+
 # authentication
-service_account = ...
-credentials = ee.ServiceAccountCredentials(service_account, '')
-ee.Initialize(credentials)
+def authenticate():
+    service_account = ...
+    credentials = ee.ServiceAccountCredentials(service_account, '')
+    ee.Initialize(credentials)
 # ---------------------------------------
 
 
@@ -52,7 +51,7 @@ def get_data(outdir, start_date, end_date, coords):
     dates = geemap.image_dates(ndwi_images, date_format='YYYY-MM-dd').getInfo()
     
     
-    path = os.path.join(outdir, "LANDSAT8_{}.tif")
+    path = os.path.join(outdir, "LANDSAT8_{}.tiff")
     for date, i in zip(dates, range(collection_size)):
         try: 
             image = ee.Image(collection_list.get(i))
@@ -79,11 +78,11 @@ def read_data(outdir):
     # STARTS DOWNLOADING DATA WITHIN DIRECTORY
    
     temp = []
-    for filename in glob.glob(os.path.join(outdir, "*.tif")):
+    for filename in glob.glob(os.path.join(outdir, "*.tiff")):
         
         with rasterio.open(os.path.join(os.getcwd(), filename)) as src:
             img = src.read()
-        temp.append((filename[-14:-4],  img[0])) # <-- (date, image)
+        temp.append((filename[-15:-5],  img[0])) # <-- (date, image)
             
     temp.sort(key = lambda date: datetime.strptime(date[0], '%Y-%m-%d'))
     

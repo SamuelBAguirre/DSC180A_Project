@@ -7,8 +7,7 @@ sys.path.insert(0, 'src/data')
 sys.path.insert(0, 'src/analysis')
 sys.path.insert(0, 'src/model')
 
-import etl
-
+from etl import read_data
 
 
 def main(targets):
@@ -40,13 +39,32 @@ def main(targets):
 #         # make the data target
 #         train(data, **model_cfg)
         
-    if 'test' in targets:
-        # here we want to read in the files saved in test/testdata and save them somewhere (probably just a folder named out)
+    if 'test' in targets:    
+        
+        import matplotlib.pyplot as plt
+        from skimage import data
+        from skimage.filters import try_all_threshold
+        from skimage.filters import threshold_minimum
+        
+        ndwi_img_lst = read_data("./test/")
 
-        
-        
-        
-     
+        for d, i in ndwi_img_lst:
+            thresh = threshold_minimum(i)
+            binary = i > thresh
+
+            fig, axes = plt.subplots(ncols=2, figsize=(8, 3))
+            ax = axes.ravel()
+
+            ax[0].imshow(i, cmap=plt.cm.gray)
+            ax[0].set_title('Orginal: {}'.format(d))
+
+            ax[1].imshow(binary, cmap=plt.cm.gray)
+            ax[1].set_title('Result: {}'.format(d))
+
+            for a in ax:
+                a.axis('off')
+
+            plt.savefig('out/binary_{}.png'.format(d))
 
     return
 

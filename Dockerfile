@@ -24,7 +24,7 @@ USER jovyan
 
 RUN pip install --no-cache-dir scipy
 
-RUN pip install --no-cache-dir earthengine-api folium geemap rasterio glob2 --upgrade
+RUN pip install --no-cache-dir earthengine-api folium geemap rasterio glob2 scikit-image --upgrade
 
 # Override command to disable running jupyter notebook at launch
 CMD ["/bin/bash"]
