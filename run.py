@@ -18,12 +18,35 @@ def main(targets):
     `main` runs the targets in order of data=>analysis=>model.
     '''
 
-#     if 'data' in targets:
-#         with open('config/data-params.json') as fh:
-#             data_cfg = json.load(fh)
+    if 'data' in targets:
+        import matplotlib.pyplot as plt
+        import sys
+        sys.path.append('./src/data/')
+        
+        from etl import read_data
+        from skimage import data
+        from skimage.filters import try_all_threshold
+        from skimage.filters import threshold_minimum
+        
+        ndwi_img_lst = read_data("./data/images/LANDSAT8_NDWI/")
 
-#         # make the data target
-#         data = etl.get_data(**data_cfg)
+        for d, i in ndwi_img_lst:
+            thresh = threshold_minimum(i)
+            binary = i > thresh
+
+            fig, axes = plt.subplots(ncols=2, figsize=(8, 3))
+            ax = axes.ravel()
+
+            ax[0].imshow(i, cmap=plt.cm.gray)
+            ax[0].set_title('Orginal: {}'.format(d))
+
+            ax[1].imshow(binary, cmap=plt.cm.gray)
+            ax[1].set_title('Result: {}'.format(d))
+
+            for a in ax:
+                a.axis('off')
+
+            plt.savefig('out/binary_{}.png'.format(d))
 
 #     if 'analysis' in targets:
 #         with open('config/analysis-params.json') as fh:

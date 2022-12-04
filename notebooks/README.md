@@ -1,0 +1,2 @@
+Requires Google Earth Engine account, for this notebook we created a service account. This notebook can also be ran with a personal Google Earth Engine account, however the authentication process is slightly different. More information can be found here: https://developers.google.com/earth-engine/tutorials/community/intro-to-python-api  
+This notebook also requires the installation of earth engine, folium, geemap, glob, scikit-learn, numpy, matplotlib, and scikit-image
