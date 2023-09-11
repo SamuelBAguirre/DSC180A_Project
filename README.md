@@ -9,3 +9,4 @@ src: Contains our source code
 test: Contains some of our testing data  
 out: Contains the processed images outputted from our source code
 
+Website: https://samuelbaguirre.github.io/
